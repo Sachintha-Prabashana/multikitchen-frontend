@@ -31,45 +31,50 @@ export default function ProductsPage() {
   );
 
   return (
-    <div className="py-24 bg-gray-50/20 min-h-screen">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+    <div className="py-24 md:py-32 lg:py-48 bg-[#F9F7F2] min-h-screen relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-[#C15B32]/10 rounded-full blur-[100px] md:blur-[150px] -mr-48 md:-mr-96 -mt-48 md:-mt-96 opacity-40" />
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-16 md:mb-32">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
+            className="max-w-2xl"
           >
-            <h1 className="text-5xl font-black mb-4 text-gray-900 leading-tight">Our <span className="text-blue-600">Inventory</span>.</h1>
-            <p className="text-xl text-gray-500 font-medium">Browse our professional-grade products and real-time stock status.</p>
+            <span className="text-[10px] font-black tracking-[0.5em] text-[#C15B32] uppercase mb-8 md:mb-12 block">The Inventory Catalogue</span>
+            <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif mb-8 md:mb-12 text-[#1F1F1F] tracking-tighter leading-[1] md:leading-[0.85]">Our <br/> <span className="italic font-light">Inventory.</span></h1>
+            <p className="text-xl md:text-2xl text-gray-400 font-serif italic">Browse our selection of premium components and structural materials.</p>
           </motion.div>
           
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="relative w-full md:w-96"
+            className="relative w-full lg:w-96"
           >
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input 
               type="text"
-              placeholder="Search products or barcode..."
+              placeholder="Search components..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 rounded-2xl border border-gray-100 bg-white shadow-lg shadow-gray-100/50 focus:outline-none focus:ring-4 focus:ring-blue-50 transition-all font-medium"
+              className="w-full h-16 md:h-20 pl-16 pr-6 rounded-full border-none bg-white shadow-2xl shadow-gray-900/5 focus:outline-none focus:ring-2 focus:ring-[#C15B32]/20 transition-all font-serif italic text-xl md:text-2xl placeholder:text-gray-200"
             />
           </motion.div>
         </div>
 
         {loading ? (
-          <div className="py-40 flex flex-col items-center justify-center text-blue-600">
+          <div className="py-40 flex flex-col items-center justify-center">
             <motion.div 
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="text-[#C15B32]"
             >
-              <Package className="h-12 w-12" />
+              <Package className="h-12 w-12 strokeWidth={1}" />
             </motion.div>
-            <p className="mt-4 font-bold text-gray-400">Syncing with warehouse...</p>
+            <p className="mt-8 font-serif italic text-2xl text-gray-400 text-center">Syncing with our Atelier...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
             <AnimatePresence>
               {filteredItems.map((item, i) => (
                 <motion.div
@@ -80,28 +85,28 @@ export default function ProductsPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Card className="rounded-[2.5rem] border-0 shadow-xl shadow-gray-200/40 overflow-hidden group hover:shadow-2xl hover:shadow-blue-100 transition-all duration-500 bg-white">
-                    <div className="h-56 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-gray-300 group-hover:from-blue-50 group-hover:to-indigo-50 transition-all duration-500 relative">
-                       <ShoppingBag className="h-16 w-16 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500" />
-                       <div className="absolute top-6 right-6">
-                         <span className={`text-[10px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full ${item.quantity > 10 ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'}`}>
+                  <Card className="rounded-[2.5rem] md:rounded-[3rem] border-0 shadow-2xl shadow-gray-900/5 overflow-hidden group hover:-translate-y-4 transition-all duration-700 bg-white relative">
+                    <div className="h-64 md:h-72 bg-[#F9F7F2] flex items-center justify-center text-gray-200 group-hover:bg-[#C15B32]/5 transition-all duration-700 relative overflow-hidden">
+                       <ShoppingBag className="h-20 w-20 md:h-24 md:w-24 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-700" />
+                       <div className="absolute top-8 right-8">
+                         <span className={`text-[8px] md:text-[9px] uppercase tracking-[0.3em] font-black px-4 py-2 rounded-full shadow-lg ${item.quantity > 10 ? 'bg-white text-green-600' : 'bg-white text-orange-600'}`}>
                            {item.quantity} In Stock
                          </span>
                        </div>
                     </div>
-                    <CardContent className="p-8">
-                      <h3 className="font-black text-xl mb-2 text-gray-900 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{item.item_name}</h3>
-                      <p className="text-xs font-bold text-gray-300 mb-6 flex items-center">
-                        <Package className="h-3 w-3 mr-1" /> SN: {item.barcode || 'N/A'}
+                    <CardContent className="p-8 md:p-10">
+                      <h3 className="font-serif text-2xl md:text-3xl mb-2 text-[#1F1F1F] leading-tight tracking-tight uppercase line-clamp-1">{item.item_name}</h3>
+                      <p className="text-[10px] font-black text-gray-400 mb-8 flex items-center uppercase tracking-widest">
+                        <Package className="h-3 w-3 mr-2 text-[#C15B32]" /> SN: {item.barcode || 'MK-ATELIER'}
                       </p>
                       
                       <div className="flex justify-between items-end">
-                        <div>
-                           <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">MSRP</p>
-                           <span className="text-3xl font-black text-gray-900">${item.selling_price}</span>
+                        <div className="flex flex-col">
+                           <p className="text-[8px] md:text-[10px] font-black text-[#C15B32] uppercase tracking-[0.3em] mb-1">MSRP Narrative</p>
+                           <span className="text-4xl md:text-5xl font-serif text-[#1F1F1F] tracking-tighter">${item.selling_price}</span>
                         </div>
-                        <button className="h-12 w-12 bg-gray-50 text-gray-400 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                           <ArrowRight className="h-5 w-5" />
+                        <button className="h-14 w-14 md:h-16 md:w-16 bg-[#1F1F1F] text-white rounded-2xl md:rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#C15B32] transition-all shadow-xl active:scale-95">
+                           <ArrowRight className="h-6 w-6" />
                         </button>
                       </div>
                     </CardContent>
@@ -116,10 +121,10 @@ export default function ProductsPage() {
                 animate={{ opacity: 1 }}
                 className="col-span-full py-32 text-center"
               >
-                <div className="inline-block p-8 bg-gray-100/50 rounded-full mb-6">
-                  <Search className="h-12 w-12 text-gray-300" />
+                <div className="inline-block p-12 bg-white rounded-full mb-8 shadow-2xl shadow-gray-900/5">
+                  <Search className="h-12 w-12 text-gray-200" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-400 italic">No items found matching your search.</h3>
+                <h3 className="text-3xl font-serif text-gray-400 italic">No components found matching your search.</h3>
               </motion.div>
             )}
           </div>
