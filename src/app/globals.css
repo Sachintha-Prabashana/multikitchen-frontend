@@ -1,21 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F9F7F2;
+  --foreground: #1A1A1A;
+  --brand-primary: #C15B32;
+  --brand-charcoal: #1A1A1A;
+  --brand-cream: #F9F7F2;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand: var(--brand-primary);
+  --color-charcoal: var(--brand-charcoal);
+  --color-cream: var(--brand-cream);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* For Atelier, we keep a readable light-ish theme as the consistent platform experience */
+    --background: #F9F7F2;
+    --foreground: #1A1A1A;
   }
 }
 
