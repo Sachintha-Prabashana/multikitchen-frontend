@@ -5,6 +5,7 @@ import * as itemService from '@/services/itemService';
 import { Button, Input, Card, CardHeader, CardTitle, CardContent } from '@/components/ui/components';
 import { Plus, Edit, Trash, Search, Package, AlertTriangle } from 'lucide-react';
 import ItemModal from '@/components/admin/ItemModal';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function ItemsPage() {
   const [items, setItems] = useState<any[]>([]);
@@ -13,6 +14,8 @@ export default function ItemsPage() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'ADMIN';
 
   const fetchItems = async () => {
     try {
@@ -114,12 +117,14 @@ export default function ItemsPage() {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <Button 
-              onClick={openAddModal}
-              className="w-full sm:w-auto h-12 px-6 rounded-2xl bg-brand text-white hover:bg-brand/90 shadow-lg shadow-brand/20 active:scale-95 transition-all flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest"
-            >
-              <Plus className="h-4 w-4" /> Add Item
-            </Button>
+            {isAdmin && (
+              <Button 
+                onClick={openAddModal}
+                className="w-full sm:w-auto h-12 px-6 rounded-2xl bg-brand text-white hover:bg-brand/90 shadow-lg shadow-brand/20 active:scale-95 transition-all flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest"
+              >
+                <Plus className="h-4 w-4" /> Add Item
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -148,7 +153,7 @@ export default function ItemsPage() {
                   <th className="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Prices (Buy/Sell)</th>
                   <th className="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Current Stock</th>
                   <th className="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Stock Status</th>
-                  <th className="px-8 py-5 text-right text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Actions</th>
+                  {isAdmin && <th className="px-8 py-5 text-right text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Actions</th>}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-50">
@@ -190,22 +195,24 @@ export default function ItemsPage() {
                         {item.quantity <= item.min_quantity ? 'Low Stock' : 'In Stock'}
                       </span>
                     </td>
-                    <td className="px-8 py-6 whitespace-nowrap text-right text-sm">
-                      <div className="flex justify-end gap-2">
-                        <button 
-                          onClick={() => openEditModal(item)}
-                          className="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-brand hover:bg-brand/5 rounded-xl transition-all"
-                        >
-                          <Edit className="h-4 w-4" />
-                        </button>
-                        <button 
-                          onClick={() => handleDelete(item.item_id)}
-                          className="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all"
-                        >
-                          <Trash className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
+                    {isAdmin && (
+                      <td className="px-8 py-6 whitespace-nowrap text-right text-sm">
+                        <div className="flex justify-end gap-2">
+                          <button 
+                            onClick={() => openEditModal(item)}
+                            className="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-brand hover:bg-brand/5 rounded-xl transition-all"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </button>
+                          <button 
+                            onClick={() => handleDelete(item.item_id)}
+                            className="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all"
+                          >
+                            <Trash className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>

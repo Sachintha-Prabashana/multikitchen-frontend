@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
 import { Button, Input } from '@/components/ui/components';
 import * as chatService from '@/services/chatService';
@@ -12,6 +12,12 @@ export default function ChatWidget() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  
+  useEffect(() => {
+    const handleOpenChat = () => setIsOpen(true);
+    window.addEventListener('open-chat', handleOpenChat);
+    return () => window.removeEventListener('open-chat', handleOpenChat);
+  }, []);
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,16 +35,16 @@ export default function ChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100]">
+    <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[100]">
       <AnimatePresence>
         {isOpen && (
           <motion.div 
             initial={{ opacity: 0, y: 20, scale: 0.95, transformOrigin: 'bottom right' }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="w-96 bg-white rounded-[2.5rem] shadow-2xl shadow-orange-900/20 border border-gray-100 overflow-hidden flex flex-col mb-6"
+            className="w-[calc(100vw-2rem)] sm:w-96 max-h-[min(650px,calc(100vh-6rem))] bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl shadow-orange-900/20 border border-gray-100 overflow-hidden flex flex-col mb-6"
           >
-            <div className="p-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white flex justify-between items-center">
+            <div className="p-4 sm:p-6 bg-gradient-to-r from-orange-600 to-amber-600 text-white flex justify-between items-center">
               <div className="flex items-center">
                 <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-md">
                   <MessageCircle className="h-6 w-6" />
@@ -56,7 +62,7 @@ export default function ChatWidget() {
               </button>
             </div>
             
-            <div className="flex-grow p-8 min-h-[350px] flex flex-col justify-end bg-gray-50/30">
+            <div className="flex-grow p-4 sm:p-8 min-h-[150px] sm:min-h-[200px] overflow-y-auto flex flex-col justify-start bg-gray-50/30">
               <AnimatePresence mode="wait">
                 {sent ? (
                   <motion.div 
@@ -95,13 +101,13 @@ export default function ChatWidget() {
             </div>
 
             {!sent && (
-              <form onSubmit={handleSend} className="p-6 bg-white border-t border-gray-50 space-y-4">
+              <form onSubmit={handleSend} className="p-4 pb-6 sm:p-6 bg-white border-t border-gray-50 space-y-3 sm:space-y-4 flex-shrink-0">
                 <div className="relative">
                   <Input 
                     placeholder="Your Name" 
                     value={name} 
                     onChange={(e) => setName(e.target.value)} 
-                    className="h-14 rounded-2xl border-cream bg-cream/70 text-charcoal focus:bg-white transition-all pl-4 font-medium" 
+                    className="h-12 sm:h-14 rounded-2xl border-cream bg-cream/70 text-charcoal focus:bg-white transition-all pl-4 font-medium" 
                     required 
                   />
                 </div>
@@ -110,15 +116,15 @@ export default function ChatWidget() {
                     placeholder="Type message..." 
                     value={message} 
                     onChange={(e) => setMessage(e.target.value)} 
-                    className="h-14 rounded-2xl border-cream bg-cream/70 text-charcoal focus:bg-white transition-all pl-4 font-medium flex-grow" 
+                    className="h-12 sm:h-14 rounded-2xl border-cream bg-cream/70 text-charcoal focus:bg-white transition-all pl-4 font-medium flex-grow" 
                     required 
                   />
                   <Button 
                     type="submit" 
                     disabled={loading}
-                    className="h-14 w-14 rounded-2xl bg-orange-600 shadow-lg shadow-orange-200 active:scale-95 transition-transform shrink-0"
+                    className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-orange-600 shadow-lg shadow-orange-200 active:scale-95 transition-transform shrink-0"
                   >
-                    {loading ? <Loader2 className="animate-spin h-6 w-6" /> : <Send className="h-6 w-6" />}
+                    {loading ? <Loader2 className="animate-spin h-5 w-5 sm:h-6 sm:w-6" /> : <Send className="h-5 w-5 sm:h-6 sm:w-6" />}
                   </Button>
                 </div>
               </form>

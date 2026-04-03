@@ -165,7 +165,10 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           </div>
           <div>
             <h4 className="text-[10px] font-black uppercase tracking-widest mb-8 text-gray-500">Consultation</h4>
-            <Button className="w-full h-20 rounded-[2rem] bg-[#C15B32] hover:bg-[#A14B22] text-white border-0 shadow-2xl shadow-orange-900/20 active:scale-95 transition-all">
+            <Button 
+              className="w-full h-20 rounded-[2rem] bg-[#C15B32] hover:bg-[#A14B22] text-white border-0 shadow-2xl shadow-orange-900/20 active:scale-95 transition-all"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-chat'))}
+            >
               <MessageCircle className="mr-3 h-5 w-5" /> Start Live Chat
             </Button>
           </div>
