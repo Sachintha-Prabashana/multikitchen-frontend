@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🏭 Smart-IMS — Frontend
 
@@ -408,4 +408,3 @@ When a `401 Unauthorized` response is received:
 Sri Lanka · 2024 – 2026
 
 </div>
-]]>
