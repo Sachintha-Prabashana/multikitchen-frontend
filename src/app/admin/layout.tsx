@@ -10,13 +10,8 @@ import {
   ArrowLeftRight, 
   BarChart3, 
   Users, 
-  Database, 
-  Settings, 
   LogOut, 
   User as UserIcon,
-  ShieldCheck,
-  Bell,
-  AlertCircle,
   Menu,
   X
 } from 'lucide-react';
@@ -31,7 +26,6 @@ const navItems = [
   { name: 'Analytics', href: '/admin/reports', icon: BarChart3 },
   { name: 'Stock Summary', href: '/admin/stock/summary', icon: BarChart3 },
   { name: 'User Management', href: '/admin/users', icon: Users },
-  { name: 'System Backup', href: '/admin/backup', icon: ShieldCheck },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
