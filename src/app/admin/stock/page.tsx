@@ -475,8 +475,8 @@ export default function StockPage() {
                           </span>
                        </td>
                        <td className="px-8 py-6 whitespace-nowrap">
-                          <p className="text-sm font-medium text-gray-500">Buy: ${i.buying_price || '0'}</p>
-                          <p className="text-sm font-bold text-brand">Sell: ${i.selling_price || '0'}</p>
+                          <p className="text-sm font-medium text-gray-500">Buy: Rs. {i.buying_price || '0'}</p>
+                          <p className="text-sm font-bold text-brand">Sell: Rs. {i.selling_price || '0'}</p>
                        </td>
                        <td className="px-8 py-6 whitespace-nowrap">
                           <p className="text-lg font-black tracking-tighter text-charcoal">{i.quantity} <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest ml-1">Units</span></p>

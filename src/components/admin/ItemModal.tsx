@@ -163,7 +163,7 @@ export default function ItemModal({ isOpen, onClose, onSave, initialData }: Item
 
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Buying Price (Optional)</label>
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Buying Price (Rs.)</label>
               <Input 
                 type="number"
                 step="0.01"
@@ -175,7 +175,7 @@ export default function ItemModal({ isOpen, onClose, onSave, initialData }: Item
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Selling Price (Optional)</label>
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Selling Price (Rs.)</label>
               <Input 
                 type="number"
                 step="0.01"

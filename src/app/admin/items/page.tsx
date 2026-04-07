@@ -183,9 +183,11 @@ export default function ItemsPage() {
                       )}
                     </td>
                     <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-500 font-medium">
-                      <span className="text-charcoal">${item.buying_price || '0.00'}</span> 
+                      <span className="text-charcoal text-[10px] font-black uppercase tracking-widest mr-1">Rs.</span>
+                      <span className="text-charcoal font-bold">{item.buying_price || '0.00'}</span> 
                       <span className="mx-2 text-gray-200">/</span> 
-                      <span className="text-brand font-bold">${item.selling_price || '0.00'}</span>
+                      <span className="text-brand text-[10px] font-black uppercase tracking-widest mr-1">Rs.</span>
+                      <span className="text-brand font-bold">{item.selling_price || '0.00'}</span>
                     </td>
                     <td className="px-8 py-6 whitespace-nowrap text-sm text-charcoal font-black tracking-tighter">
                       {item.quantity} <span className="text-[10px] text-gray-400 font-normal uppercase tracking-widest ml-1">Units</span>

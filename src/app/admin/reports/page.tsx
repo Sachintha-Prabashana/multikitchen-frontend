@@ -122,7 +122,7 @@ export default function ReportsPage() {
         {/* Left Col: Simple Analytics */}
         <div className="lg:col-span-12 space-y-8 md:space-y-12">
            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-              <KPICard title="Portfolio Valuation" value={`LKR ${summary.totalStockValue.toLocaleString()}`} icon={TrendingUp} color="text-charcoal" />
+              <KPICard title="Portfolio Valuation" value={`Rs. ${summary.totalStockValue.toLocaleString()}`} icon={TrendingUp} color="text-charcoal" />
               <KPICard title="Inventory Health" value={`${Math.round((summary.healthyStockItems / summary.totalItems) * 100)}%`} icon={CheckCircle2} color="text-emerald-500" />
               <KPICard title="Movement Frequency" value={trends.reduce((acc:any, t:any) => acc + t.issues + t.receives, 0)} icon={Layers} color="text-brand" />
            </div>

@@ -101,10 +101,13 @@ export default function ProductsPage() {
                       </p>
                       
                       <div className="flex justify-between items-end">
-                        <div className="flex flex-col">
-                           <p className="text-[8px] md:text-[10px] font-black text-[#C15B32] uppercase tracking-[0.3em] mb-1">MSRP Narrative</p>
-                           <span className="text-4xl md:text-5xl font-serif text-[#1F1F1F] tracking-tighter">${item.selling_price}</span>
-                        </div>
+                         <div className="flex flex-col">
+                            <p className="text-[8px] md:text-[10px] font-black text-[#C15B32] uppercase tracking-[0.3em] mb-1">MSRP Narrative</p>
+                            <div className="flex items-baseline gap-2">
+                               <span className="text-xl md:text-2xl font-serif text-[#C15B32] italic">Rs.</span>
+                               <span className="text-4xl md:text-5xl font-serif text-[#1F1F1F] tracking-tighter">{item.selling_price}</span>
+                            </div>
+                         </div>
                         <button className="h-14 w-14 md:h-16 md:w-16 bg-[#1F1F1F] text-white rounded-2xl md:rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#C15B32] transition-all shadow-xl active:scale-95">
                            <ArrowRight className="h-6 w-6" />
                         </button>

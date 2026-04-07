@@ -83,7 +83,7 @@ export default function DashboardPage() {
       {/* Stats Cards - Hidden on mobile per user request */}
       <div className="hidden md:grid grid-cols-2 xl:grid-cols-4 gap-6 md:gap-10">
         <StatCard title="Total Inventory Item" value={stats.totalItems} icon={Package} type="dark" desc="Active items in registry" />
-        <StatCard title="Total Stock Value" value={`LKR ${stats.stockValue.toLocaleString()}`} icon={TrendingUp} type="light" desc="Estimated inventory worth" />
+        <StatCard title="Total Stock Value" value={`Rs. ${stats.stockValue.toLocaleString()}`} icon={TrendingUp} type="light" desc="Estimated inventory worth" />
         <StatCard title="Low Stock Warning" value={stats.lowStockCount} icon={AlertTriangle} type="warning" desc="Items below minimum level" />
         <StatCard title="Today's Movements" value={stats.todayIssues + stats.todayReceives} icon={Clock} type="accent" desc="Total stock operations today" />
       </div>
